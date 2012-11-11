@@ -16,26 +16,26 @@ class FFunction
 
   private
 
-    def expander(six_bit)
-      e = six_bit
-      return e[0..1] << e[3] << e[2] << e[3] << e[2] << e[4] << e[5]
-    end
+  def expander(six_bit)
+    e = six_bit
+    return e[0..1] << e[3] << e[2] << e[3] << e[2] << e[4] << e[5]
+  end
 
-    def sbox_magic(sbox, half_xored)
-      row = half_xored[0]
-      column_string = ""
-      half_xored[1..3].each { |bit| column_string += bit.to_s }
-      column = column_string.to_i(2)
-      l_half = sbox[row][column]
-    end
+  def sbox_magic(sbox, half_xored)
+    row = half_xored[0]
+    column_string = ""
+    half_xored[1..3].each { |bit| column_string += bit.to_s }
+    column = column_string.to_i(2)
+    l_half = sbox[row][column]
+  end
 
-    SBOX_1 = [
-      [[1,0,1], [0,1,0], [0,0,1], [1,1,0], [0,1,1], [1,0,0], [1,1,1], [0,0,0]],
-      [[0,0,1], [1,0,0], [1,1,0], [0,1,0], [0,0,0], [1,1,1], [1,0,1], [0,1,1]]
-    ]
-    SBOX_2 = [
-      [[1,0,0], [0,0,0], [1,1,0], [1,0,1], [1,1,1], [0,0,1], [0,1,1], [0,1,0]],
-      [[1,0,1], [0,1,1], [0,0,0], [1,1,1], [1,1,0], [0,1,0], [0,0,1], [1,0,0]]
-    ]
+  SBOX_1 = [
+    [[1,0,1], [0,1,0], [0,0,1], [1,1,0], [0,1,1], [1,0,0], [1,1,1], [0,0,0]],
+    [[0,0,1], [1,0,0], [1,1,0], [0,1,0], [0,0,0], [1,1,1], [1,0,1], [0,1,1]]
+  ]
+  SBOX_2 = [
+    [[1,0,0], [0,0,0], [1,1,0], [1,0,1], [1,1,1], [0,0,1], [0,1,1], [0,1,0]],
+    [[1,0,1], [0,1,1], [0,0,0], [1,1,1], [1,1,0], [0,1,0], [0,0,1], [1,0,0]]
+  ]
 
 end

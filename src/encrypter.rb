@@ -32,9 +32,7 @@ class Encrypter
     k = Key.new(ary_key)
     1.upto 4 do |i|
       k_i = k.calculate(i)
-      puts "chiave #{i}: #{k_i}"
       round = Round.new(ary_message, k_i)
-      puts "round #{i}: #{round.calculate}"
       ary_message = round.calculate
     end
 
@@ -44,24 +42,20 @@ class Encrypter
   def decrypt(cyphertext, key)
     validate_message_format(cyphertext)
     validate_key_format(key)
-    
-    puts cyphertext.split(//)
+
     ary_message = ary_str_to_ary_int(cyphertext.split(//))
-    left_right_inverted = []
-    left_right_inverted[0..5] = ary_message[6..11]
-    left_right_inverted[6..11] = ary_message[0..5]
-    ary_message = left_right_inverted
+    ary_message = invert_12_bits_array(ary_message)
+
     ary_key = ary_str_to_ary_int(key.split(//))
 
     k = Key.new(ary_key)
     4.downto 1 do |i|
       k_i = k.calculate(i)
-      puts "chiave #{i}: #{k_i}"
       round = Round.new(ary_message, k_i)
       ary_message = round.calculate
     end
 
-    return ary_message.join
+    return invert_12_bits_array(ary_message).join
   end
 
   private
@@ -83,4 +77,10 @@ class Encrypter
     end
   end
 
+  def invert_12_bits_array(array)
+    left_right_inverted = []
+    left_right_inverted[0..5] = array[6..11]
+    left_right_inverted[6..11] = array[0..5]
+    return left_right_inverted
+  end
 end

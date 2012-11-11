@@ -7,7 +7,6 @@ describe FFunction do
     k_i = [0,1,1,0,0,1,0,1]
     f = FFunction.new
     f.calculate(r, k_i).should == [0,0,0,1,0,0]
-    puts f.calculate([0,0,0,1,1,1], [0,0,1,0,0,1,1,0])
   end
 
 end
